@@ -30,23 +30,27 @@ string = encryptedText.toString();
 function decryption(message) {
 
     let lettersArray = new Array();
-    let max = -1;
+    let max = 0;
     let maxletter = "";
     let decryptshift = 0;
     for (var i = 0; i < message.length; i++) {
         if (message.charCodeAt(i) > 96 && message.charCodeAt(i) < 123 || message.charCodeAt(i) > 64 && message.charCodeAt(i) < 91) {
             if (message[i] in lettersArray) {
-                lettersArray[message[i]] += 1 / message.length;
+                lettersArray[message[i]] += 1;
             }
             else {
-                lettersArray[message[i]] = 1 / message.length;
-            }
-            if (lettersArray[message[i]] > max) {
-                max = lettersArray[message[i]];
-                maxletter = message[i];
+                lettersArray[message[i]] = 1;
             }
         }
     }
+
+    for (var i = 0; i < message.length; i++) {
+        if (lettersArray[message[i]] > max) {
+            max = lettersArray[message[i]];
+            maxletter = message[i];
+        }
+    }
+
     decryptshift = maxletter.charCodeAt(0) - maxfreqletter.charCodeAt(0);
     console.log('Cesar code shift -', decryptshift);
     for (let i = 0; i < message.length; i++) {
